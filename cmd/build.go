@@ -52,18 +52,14 @@ const (
 )
 
 func BuildCommand(ctx context.Context, dir, manifestPath, lockfilePath string) error {
-	mf, lf, err := manifest.ParseManifests(dir, manifestPath, lockfilePath)
+	mf, err := manifest.ParseManifest(dir, manifestPath, lockfilePath)
 	if err != nil {
 		return err
 	}
-	var lockedPackages int
-	if lf != nil {
-		lockedPackages = len(lf.Packages)
-	}
 	logrus.WithFields(logrus.Fields{
-		"image":           mf.Image,
-		"packages":        len(mf.Packages),
-		"locked_packages": lockedPackages,
+		"image":           mf.DpkgJSON.Image,
+		"packages":        mf.PackageCount(),
+		"locked_packages": mf.LockedPackageCount(),
 	}).Info("loaded manifest and lockfile")
 
 	cli, err := client.NewClientWithOpts(client.FromEnv)
@@ -74,7 +70,7 @@ func BuildCommand(ctx context.Context, dir, manifestPath, lockfilePath string) e
 	b := build.NewBuilder(cli)
 
 	// Calculate and write lockfile:
-	lock, err := b.Lock(ctx, mf)
+	lock, err := b.Lock(ctx, *mf)
 	if err != nil {
 		return fmt.Errorf("generating lockfile: %w", err)
 	}

@@ -24,13 +24,14 @@ func TestBuilder_Build(t *testing.T) {
 	b := build.NewBuilder(cli)
 
 	ctx := context.Background()
-	m := &manifest.DpkgJSON{
-		Image:  "test",
-		Distro: "buster",
-		Packages: map[manifest.PackageName]manifest.PackageVersion{
-			"bash": "stable",
-		},
-	}
+	m := manifest.Manifest{
+		DpkgJSON: manifest.DpkgJSON{
+			Image:  "test",
+			Distro: "buster",
+			Packages: map[manifest.PackageName]manifest.PackageVersion{
+				"bash": "stable",
+			},
+		}}
 	err = b.Build(ctx, m)
 	require.NoError(t, err)
 }
@@ -43,11 +44,13 @@ func TestBuilder_Lock(t *testing.T) {
 	b := build.NewBuilder(cli)
 
 	ctx := context.Background()
-	m := &manifest.DpkgJSON{
-		Image:  "test",
-		Distro: "buster",
-		Packages: map[manifest.PackageName]manifest.PackageVersion{
-			"bash": "stable",
+	m := manifest.Manifest{
+		DpkgJSON: manifest.DpkgJSON{
+			Image:  "test",
+			Distro: "buster",
+			Packages: map[manifest.PackageName]manifest.PackageVersion{
+				"bash": "stable",
+			},
 		},
 	}
 	dpkgLock, err := b.Lock(ctx, m)

@@ -26,19 +26,27 @@ func NewBuilder(docker *client.Client) *Builder {
 	return &Builder{docker: docker}
 }
 
-func (b *Builder) Build(ctx context.Context, dpkgJSON *manifest.DpkgJSON) error {
-	return b.build(ctx, dpkgJSON, "", dpkgJSON.Image)
+func (b *Builder) Build(ctx context.Context, mf manifest.Manifest) error {
+	return b.build(ctx, mf, "", mf.DpkgJSON.Image)
 }
 
-func (b *Builder) build(ctx context.Context, dpkgJSON *manifest.DpkgJSON, target string, tag string) error {
-	logger := logrus.WithField("image", dpkgJSON.Image)
+func (b *Builder) build(ctx context.Context, mf manifest.Manifest, target string, tag string) error {
+	logger := logrus.WithField("image", mf.DpkgJSON.Image)
 
 	// Generate Dockerfile and prepare context:
-	dockerfile, err := genDockerfile(dpkgJSON)
+	dockerfile, err := genDockerfile(mf)
 	if err != nil {
 		return fmt.Errorf("generating dockerfile: %w", err)
 	}
-	logger.WithField("dockerfile", dockerfile).Debug("generated dockerfile")
+
+	if logrus.IsLevelEnabled(logrus.DebugLevel) {
+		out := logger.WriterLevel(logrus.DebugLevel)
+		_, _ = fmt.Fprintln(out, "-- Dockerfile")
+		_, _ = out.Write([]byte(dockerfile))
+		_, _ = fmt.Fprintln(out, "-- /Dockerfile")
+		_ = out.Close()
+	}
+
 	contextTar, err := buildContext(dockerfile)
 	if err != nil {
 		return fmt.Errorf("preparing build context: %w", err)
@@ -55,24 +63,30 @@ func (b *Builder) build(ctx context.Context, dpkgJSON *manifest.DpkgJSON, target
 	}
 	defer build.Body.Close()
 
-	var buildOutput bytes.Buffer
-	if err := jsonmessage.DisplayJSONMessagesStream(build.Body, &buildOutput, 0, false, nil); err != nil {
-		return fmt.Errorf("reading build output: %w", err)
+	var out io.Writer
+	if logrus.IsLevelEnabled(logrus.DebugLevel) {
+		logOut := logger.WriterLevel(logrus.DebugLevel)
+		defer logOut.Close()
+		out = logOut
+	} else {
+		out = ioutil.Discard
 	}
 
-	// Spam:
-	logger.Info("completed build")
-	for _, l := range strings.Split(buildOutput.String(), "\n") {
-		logger.WithField("line", strings.TrimSpace(l)).Debug("build output")
+	_, _ = fmt.Fprintln(out, "-- build log")
+	if err := jsonmessage.DisplayJSONMessagesStream(build.Body, out, 0, false, nil); err != nil {
+		return fmt.Errorf("reading build output: %w", err)
 	}
+	_, _ = fmt.Fprintln(out, "-- /build log")
+
+	logger.Info("completed build")
 	return nil
 }
 
 var packageLine = regexp.MustCompile("(?P<package>[^/]+)/(?P<release>[^ ]+) (?P<version>[^ ]+) (?P<arch>[^ ]+) (?P<meta>[^ ]+)")
 
-func (b *Builder) Lock(ctx context.Context, dpkgJSON *manifest.DpkgJSON) (*manifest.DpkgLockJSON, error) {
-	manifestImage := fmt.Sprintf("debendabot-manifest/%s", dpkgJSON.Image)
-	if err := b.build(ctx, dpkgJSON, "manifest", manifestImage); err != nil {
+func (b *Builder) Lock(ctx context.Context, mf manifest.Manifest) (*manifest.DpkgLockJSON, error) {
+	manifestImage := fmt.Sprintf("debendabot-manifest/%s", mf.DpkgJSON.Image)
+	if err := b.build(ctx, mf, "manifest", manifestImage); err != nil {
 		return nil, fmt.Errorf("rebuilding manifest: %w", err)
 	}
 

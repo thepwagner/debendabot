@@ -37,16 +37,16 @@ ENV http_proxy=
 `))
 
 type dockerfileTemplateParams struct {
-	*manifest.DpkgJSON
+	manifest.DpkgJSON
 	PackageSpecs []string
 	Proxy        string
 }
 
-func genDockerfile(dpkgJSON *manifest.DpkgJSON) (string, error) {
+func genDockerfile(mf manifest.Manifest) (string, error) {
 	var buf strings.Builder
 
 	p := dockerfileTemplateParams{
-		DpkgJSON: dpkgJSON,
+		DpkgJSON: mf.DpkgJSON,
 		// FIXME: don't hardcode my apt-cacher
 		Proxy: "http://172.17.0.1:3142",
 	}
@@ -64,5 +64,15 @@ func genDockerfile(dpkgJSON *manifest.DpkgJSON) (string, error) {
 	if err := dockerfileTemplate.Execute(&buf, p); err != nil {
 		return "", fmt.Errorf("rendering dockerfile template: %w", err)
 	}
-	return buf.String(), nil
+
+	// Trim empty lines, so the template can be less awkward about newlines:
+	var ret strings.Builder
+	for _, line := range strings.Split(buf.String(), "\n") {
+		l := strings.TrimSpace(line)
+		if l != "" {
+			ret.WriteString(line)
+			ret.WriteRune('\n')
+		}
+	}
+	return ret.String(), nil
 }

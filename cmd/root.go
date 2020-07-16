@@ -32,6 +32,7 @@ var rootCmd = &cobra.Command{
 		logrus.SetFormatter(&logrus.TextFormatter{
 			TimestampFormat: "15:04:05.000",
 			FullTimestamp:   true,
+
 		})
 		return nil
 	},
