@@ -29,9 +29,23 @@ RUN apt-get update
 
 FROM sources AS build
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get install -y \{{ range $packageSpec := .PackageSpecs }}
-	{{$packageSpec}} \{{ end }}
-  && true  {{/* avoid empty continuation */}}
+
+{{ if .LockedPackages }}
+RUN apt-get install -y \
+{{ range $packageSpec := .LockedPackageSpecs }}
+	{{$packageSpec}} \
+{{ end }}
+  && apt-mark auto \
+{{ range $packageSpec := .LockedPackages }}
+	{{$packageSpec}} \
+{{ end }}
+  && true
+{{ end }}
+RUN apt-get install -y --no-install-recommends \
+{{ range $packageSpec := .PackageSpecs }}
+	{{$packageSpec}} \
+{{ end }}
+  && true
 
 FROM build AS manifest
 RUN apt list --installed -qq | tee /apt-installed.txt
@@ -43,9 +57,11 @@ ENV http_proxy=
 `))
 
 type dockerfileTemplateParams struct {
-	BaseImage    string
-	PackageSpecs []string
-	Proxy        string
+	BaseImage          string
+	LockedPackageSpecs []string
+	LockedPackages     []string
+	PackageSpecs       []string
+	Proxy              string
 }
 
 func genDockerfile(mf manifest.Manifest) (string, error) {
@@ -57,24 +73,27 @@ func genDockerfile(mf manifest.Manifest) (string, error) {
 	}
 	p.BaseImage = baseImage(mf)
 
-	if mf.DpkgLockJSON == nil {
-		// Build package specs from dpkg.json:
-		for name, version := range mf.DpkgJSON.Packages {
-			switch version {
-			case "stable", "unstable", "testing":
-				p.PackageSpecs = append(p.PackageSpecs, fmt.Sprintf("%s/%s", name, version))
-			default:
-				// XXX: this requires an exact match - could we filter candidates against semver?
-				// not all packages _are_ semver; some library can handle that? :crossed_fingers:
-				p.PackageSpecs = append(p.PackageSpecs, fmt.Sprintf("%s=%s", name, version))
-			}
-		}
-	} else {
-		for name, lock := range mf.DpkgLockJSON.Packages {
-			p.PackageSpecs = append(p.PackageSpecs, fmt.Sprintf("%s=%s", name, lock.Version))
+	// Build package specs from dpkg.json:
+	for name, version := range mf.DpkgJSON.Packages {
+		switch version {
+		case "stable", "unstable", "testing":
+			p.PackageSpecs = append(p.PackageSpecs, fmt.Sprintf("%s/%s", name, version))
+		default:
+			// XXX: this requires an exact match - could we filter candidates against semver?
+			// not all packages _are_ semver; some library can handle that? :crossed_fingers:
+			p.PackageSpecs = append(p.PackageSpecs, fmt.Sprintf("%s=%s", name, version))
 		}
 	}
 	sort.Strings(p.PackageSpecs)
+
+	if mf.DpkgLockJSON != nil {
+		for name, lock := range mf.DpkgLockJSON.Packages {
+			p.LockedPackageSpecs = append(p.LockedPackageSpecs, fmt.Sprintf("%s=%s", name, lock.Version))
+			p.LockedPackages = append(p.LockedPackages, string(name))
+		}
+	}
+	sort.Strings(p.LockedPackageSpecs)
+	sort.Strings(p.LockedPackages)
 
 	if err := dockerfileTemplate.Execute(&buf, p); err != nil {
 		return "", fmt.Errorf("rendering dockerfile template: %w", err)
