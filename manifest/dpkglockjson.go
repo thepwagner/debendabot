@@ -10,7 +10,8 @@ const LockFilename = "dpkg-lock.json"
 type LockedPackage struct {
 	Version      string `json:"version"`
 	Architecture string `json:"architecture"`
-	// TODO: hash the deb?
+	DebFilename  string `json:"filename"`
+	DebHash      string `json:"filehash"`
 }
 
 type DpkgLockJSON struct {

@@ -120,6 +120,28 @@ func (b *Builder) Lock(ctx context.Context, mf manifest.Manifest) (*manifest.Dpk
 	}
 	pkgList := strings.Split(string(aptInstalled), "\n")
 
+	debHashes, err := b.readFile(ctx, ctr.ID, "/deb-hashes.txt")
+	if err != nil {
+		return nil, err
+	}
+	packageHashList := strings.Split(string(debHashes), "\n")
+	type hashedPackage struct {
+		filename string
+		hash     string
+	}
+	packageHashes := make(map[manifest.PackageName]hashedPackage, len(packageHashList))
+	for _, packageHashLine := range packageHashList {
+		if packageHashLine == "" {
+			continue
+		}
+		lineParts := strings.Split(packageHashLine, "  ") //intentional 2 spaces
+		packageName := manifest.PackageName(strings.Split(lineParts[1], "_")[0])
+		packageHashes[packageName] = hashedPackage{
+			filename: lineParts[1],
+			hash:     lineParts[0],
+		}
+	}
+
 	dpkgLock.Packages = make(map[manifest.PackageName]manifest.LockedPackage, len(pkgList))
 	for _, installedPackage := range pkgList {
 		if installedPackage == "" {
@@ -143,6 +165,15 @@ func (b *Builder) Lock(ctx context.Context, mf manifest.Manifest) (*manifest.Dpk
 				lock.Architecture = match[i]
 			}
 		}
+
+		hash, ok := packageHashes[pkg]
+		if !ok {
+			logrus.WithField("pkg", pkg).Warn("unhashed package")
+		} else {
+			lock.DebFilename = hash.filename
+			lock.DebHash = hash.hash
+		}
+
 		dpkgLock.Packages[pkg] = lock
 	}
 	return dpkgLock, nil
