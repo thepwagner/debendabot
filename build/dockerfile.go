@@ -28,7 +28,7 @@ RUN apt-get install -y \{{ range $packageSpec := .PackageSpecs }}
   && true  {{/* avoid empty continuation */}}
 
 FROM build AS manifest
-RUN apt list --installed | tee /apt-installed.txt
+RUN apt list --installed -qq | tee /apt-installed.txt
 
 FROM build
 {{if .Proxy}}
