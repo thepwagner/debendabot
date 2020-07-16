@@ -1,0 +1,8 @@
+{
+  "image": "thepwagner/zsh",
+  "distro": "buster",
+  "packages": {
+    "zsh": "stable"
+  }
+}
+

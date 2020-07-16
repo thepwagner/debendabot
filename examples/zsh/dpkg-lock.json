@@ -1,0 +1,527 @@
+{
+  "image": "debian@sha256:d67632d49fcae559f86bd2b685c9159d0b1e799fd1d109dfbfccfab4ea773ba5",
+  "packages": {
+    "adduser": {
+      "version": "3.118",
+      "architecture": "all",
+      "filename": "adduser_3.118_all.deb",
+      "filehash": "cac3317d144e7917c7e804dfc763414324b17be0a10f43800bb4b4df23f43fb5f8e272c131b84edf3fc8dbc375a920b19d5d18590fa14e1ec3e4b4ae58dd706d"
+    },
+    "apt": {
+      "version": "1.8.2",
+      "architecture": "amd64",
+      "filename": "apt_1.8.2_amd64.deb",
+      "filehash": "1314bd1355c9fdb6cba2784286a87740735becbcc1e4a767d1efcb9cb88f6205cf29afd2093d8e725fde5f3152e6d03246ad3e54617bca836c3d5a551eadb4ba"
+    },
+    "base-files": {
+      "version": "10.3+deb10u4",
+      "architecture": "amd64",
+      "filename": "base-files_10.3+deb10u4_amd64.deb",
+      "filehash": "f981c105ab3f8ff7124f05ccf17f43a5375cf47ca15d9db12202355347b19e34a1de01910d5057e678877aac8d4e05e105deeacbc88d00162a87b658724f893f"
+    },
+    "base-passwd": {
+      "version": "3.5.46",
+      "architecture": "amd64",
+      "filename": "base-passwd_3.5.46_amd64.deb",
+      "filehash": "28f1e1467dc9e857a2701930fc18ce9b6139ac789dff64d4355093abe30b2a391972dadef04522905c89293520b7ed92daea84fd56e13836b9a9cf91651bb2dd"
+    },
+    "bash": {
+      "version": "5.0-4",
+      "architecture": "amd64",
+      "filename": "bash_5.0-4_amd64.deb",
+      "filehash": "d8efe0d4fbfc156ef5247e874fd3e727ce7a34ea085570389bb9f42b79250ee2a18dbcc91d3251085069facad979ed9f6f2fdee55c049f4bb4658a8b9470ee7f"
+    },
+    "bsdutils": {
+      "version": "1:2.33.1-0.1",
+      "architecture": "amd64",
+      "filename": "bsdutils_1%3a2.33.1-0.1_amd64.deb",
+      "filehash": "370b9b68ace0b3f5e6f6fbf46bd765ebc5dbffdf4c8fbe0f9029331e17f4918f62ee7fbc1a68123c0bec4d27e4e95142ddf34a5f9353a26ed227d95d7f0e0083"
+    },
+    "coreutils": {
+      "version": "8.30-3",
+      "architecture": "amd64",
+      "filename": "coreutils_8.30-3_amd64.deb",
+      "filehash": "f34857070dc249f9214245f3aa1734d8a73c86ba94254182a22a0f9c89e8f4c24f06a7fa2ac62673ab7f73d9b273353e9c0959187e6ce2de9e30f36286e483e2"
+    },
+    "dash": {
+      "version": "0.5.10.2-5",
+      "architecture": "amd64",
+      "filename": "dash_0.5.10.2-5_amd64.deb",
+      "filehash": "3502cfe6878f2e1e93ebfbd0ce7910ab8d0d9768d8c4557d9bf6b1dae52496c77c9d5ace95ea59c73312b59a52a9879c195e6f831437a88772c8402f9039e62f"
+    },
+    "debconf": {
+      "version": "1.5.71",
+      "architecture": "all",
+      "filename": "debconf_1.5.71_all.deb",
+      "filehash": "2193c03a9d8575b24322df0dfe6ad84a4153515d44beac4a42b7ccab97c6eb8454cd49d3cf445009f1afefd4fe8f9357028657668bd736e1da7a567233bb14c8"
+    },
+    "debian-archive-keyring": {
+      "version": "2019.1",
+      "architecture": "all",
+      "filename": "debian-archive-keyring_2019.1_all.deb",
+      "filehash": "051b8507c9deba0d13dc0137ff43ae9db27b20b78c3437ca680046ae9b1c81ac505dc0a4460d4a83c4b256a04a2e57d1280eb2e8a3afb2a58f150ca6c37d0d63"
+    },
+    "debianutils": {
+      "version": "4.8.6.1",
+      "architecture": "amd64",
+      "filename": "debianutils_4.8.6.1_amd64.deb",
+      "filehash": "ff3f0f5b3914a32c905627405d2c2c1dfa554f30e607b37c901cb8f94135b50490d3bffbf54b050187fb6c813cb3caee148ebbe19e95ba6e2047a4ee99c21b17"
+    },
+    "diffutils": {
+      "version": "1:3.7-3",
+      "architecture": "amd64",
+      "filename": "diffutils_1%3a3.7-3_amd64.deb",
+      "filehash": "16dd81c06c4cd966f5c9e2f7d572eaab956e1c46ae88b85a259979f3eb0c0b442309aa00f5f6c342821b494234c52bc0e7439f93158e009ef87b33f4d42c04c0"
+    },
+    "dpkg": {
+      "version": "1.19.7",
+      "architecture": "amd64",
+      "filename": "dpkg_1.19.7_amd64.deb",
+      "filehash": "2ccd0b86bf78dd07fe929419199d3daa785010c13697cc23a9fe46fc1f78edebf31fb8853c37efab5cd4aa4b6a3affc526b930dfe6aa9a89b78ab4f40bff8686"
+    },
+    "e2fsprogs": {
+      "version": "1.44.5-1+deb10u3",
+      "architecture": "amd64",
+      "filename": "e2fsprogs_1.44.5-1+deb10u3_amd64.deb",
+      "filehash": "e5be6d86348466d103f03c37a226c35898ab3904a13379dbbab58b6c4c6d87c43768549102687a7795c19279874610c21ec06249d114c5fb8148e87a9157bda8"
+    },
+    "fdisk": {
+      "version": "2.33.1-0.1",
+      "architecture": "amd64",
+      "filename": "fdisk_2.33.1-0.1_amd64.deb",
+      "filehash": "6d1fcf37a27f105a305156146389ac36a247bbb982745046ecca8ce2405ec6d0674da4fe42832fceef4d82a45c628f2a98ab94183cc6c97750984ac66cf32b68"
+    },
+    "findutils": {
+      "version": "4.6.0+git+20190209-2",
+      "architecture": "amd64",
+      "filename": "findutils_4.6.0+git+20190209-2_amd64.deb",
+      "filehash": "eadde2641e091e3f0388d8f7838b0fa35cdef3bd08534ef8cf95d819ae7a199ee7e8f2b5ab3e32e404714fdfec0c26e46e0c65324c291fc2c03166275ac9e59d"
+    },
+    "gcc-8-base": {
+      "version": "8.3.0-6",
+      "architecture": "amd64",
+      "filename": "gcc-8-base_8.3.0-6_amd64.deb",
+      "filehash": "da5026e447a5b8beab00d21a1a93fea73ac6d90018d49c46557c51b93d9507fd3f4ee11bba3e3c4a59df255632d7700322da88f2b1aa35b9621da7179285140d"
+    },
+    "gpgv": {
+      "version": "2.2.12-1+deb10u1",
+      "architecture": "amd64",
+      "filename": "gpgv_2.2.12-1+deb10u1_amd64.deb",
+      "filehash": "213a144b3a7ba6639b1d95a31ee32dd868a479dc9c58616aa9106aea577e285d607e95c2a67b87a3ff419cf28c5b1424dfd704ef7ee2846c4854e171505834fd"
+    },
+    "grep": {
+      "version": "3.3-1",
+      "architecture": "amd64",
+      "filename": "grep_3.3-1_amd64.deb",
+      "filehash": "19d43078336387d558c7fee9f434705de4a76b35d67b0bf1588ad3e0c03d77b39d09a6b1f39e43e2c8b198f63c4e6ef6248d5ba8a641f658f96774ab97831bd0"
+    },
+    "gzip": {
+      "version": "1.9-3",
+      "architecture": "amd64",
+      "filename": "gzip_1.9-3_amd64.deb",
+      "filehash": "f648dfd6f9fed517d8766fb6eb406687457ddc2146e595b5896b740c86e285f19f8f959b3eed2d7853ea8916756f30859b483f6b38ba5638143560d4452bdf4d"
+    },
+    "hostname": {
+      "version": "3.21",
+      "architecture": "amd64",
+      "filename": "hostname_3.21_amd64.deb",
+      "filehash": "67c7d063b4bba9589934d4c29d44759373cea8477e938f1fa416e4d749a02fff94bfdc3df3e5591035bd9697314f94aeba19833d1e6d53c2207dffb6bde4e043"
+    },
+    "init-system-helpers": {
+      "version": "1.56+nmu1",
+      "architecture": "all",
+      "filename": "init-system-helpers_1.56+nmu1_all.deb",
+      "filehash": "9a5ee8d02a02c631f65db602049de1761389b9081929ed763fba980ef5bbad8a545690d476258bd79fa721663a66e7f32f16f3e000cd89977156ed95f7398271"
+    },
+    "libacl1": {
+      "version": "2.2.53-4",
+      "architecture": "amd64",
+      "filename": "libacl1_2.2.53-4_amd64.deb",
+      "filehash": "96fc4dbe06217eda0b02f6a9fae0f244ad33247ee6121fe9110734d3829e827e4d5330ba04e6d00fd4fc2b2becfb355fd920c1687a6574b85abc45264307a41a"
+    },
+    "libapt-pkg5.0": {
+      "version": "1.8.2",
+      "architecture": "amd64",
+      "filename": "libapt-pkg5.0_1.8.2_amd64.deb",
+      "filehash": "f8a5834208b1756944aaee05bb5457230d91f0764f24f059c4a3cd4e81b521e486f8c3f7fea8877c29db1767a7db50b1991effda6cfe06e4be1149c00aef5944"
+    },
+    "libattr1": {
+      "version": "1:2.4.48-4",
+      "architecture": "amd64",
+      "filename": "libattr1_1%3a2.4.48-4_amd64.deb",
+      "filehash": "d22cc951882db71f64e30bf555412de0db11a68bca481d2f16f6afd1d9c3da2a6e65d44da6a4313587d84aeb487558bc0d13d5559b35794eed9716208668d6a0"
+    },
+    "libaudit-common": {
+      "version": "1:2.8.4-3",
+      "architecture": "all",
+      "filename": "libaudit-common_1%3a2.8.4-3_all.deb",
+      "filehash": "a0fcc88958d59d4ae9f13363e3860a9a5ed8b4eb3dd59d4f37147e6750cffb615f4832ac6702c36553faa261a93d193bd4c134d13366bcc760ed328acc454ad0"
+    },
+    "libaudit1": {
+      "version": "1:2.8.4-3",
+      "architecture": "amd64",
+      "filename": "libaudit1_1%3a2.8.4-3_amd64.deb",
+      "filehash": "e3f9c8974b3fa7b922bb29a62e09ab2912a73f3fe921b48c38869bb64bd364210f0c4ad61cf23b13b5d99fc804c91fd7a281b0dc3f79c66e09f03ca41110c0d4"
+    },
+    "libblkid1": {
+      "version": "2.33.1-0.1",
+      "architecture": "amd64",
+      "filename": "libblkid1_2.33.1-0.1_amd64.deb",
+      "filehash": "df1595eb3398946a734cdb824b469514570a9095c6c32351805f1d0ba1e3c4950dcbc6d1a7e37816c832c8a5b71ef625f5ca7cc7c04aee318720887f13016ea7"
+    },
+    "libbz2-1.0": {
+      "version": "1.0.6-9.2~deb10u1",
+      "architecture": "amd64",
+      "filename": "libbz2-1.0_1.0.6-9.2~deb10u1_amd64.deb",
+      "filehash": "abc124c15c1d76e27367fe31952452fc458d3da391e27fb32d776206b5e15d5a26f9cba3411b22202d70fb1998d197b1299bffb2f06e6eca5822ed71a680a699"
+    },
+    "libc-bin": {
+      "version": "2.28-10",
+      "architecture": "amd64",
+      "filename": "libc-bin_2.28-10_amd64.deb",
+      "filehash": "1b4815e20e5c6454c343431939c64ef651fbb0713fc5ac6f1c4ca9d91dd41d8a7cdfbfd616a26d7e2a456d0898eccbecb7a83e508c2e699f35a3c0d28794fc78"
+    },
+    "libc6": {
+      "version": "2.28-10",
+      "architecture": "amd64",
+      "filename": "libc6_2.28-10_amd64.deb",
+      "filehash": "98e365fcd2d99c640f74bf76ab0d475d0cf3844f2a7e2fda43b4bfc418f15a3236eb067cee5ce1cff6ac6349edb474b330c7845f1d2e35ec4cce797fc59c8af6"
+    },
+    "libcap-ng0": {
+      "version": "0.7.9-2",
+      "architecture": "amd64",
+      "filename": "libcap-ng0_0.7.9-2_amd64.deb",
+      "filehash": "6a025fc59e069a7da6284bb354b5968a2b0a0071bfb2c5e8bba86e6880d6e9d7e7a1bdc3c9d9713048ecbb3bc3f060c9f41c61bc44524f677a3f4a2a39cdfe67"
+    },
+    "libcap2": {
+      "version": "1:2.25-2",
+      "architecture": "amd64",
+      "filename": "libcap2_1%3a2.25-2_amd64.deb",
+      "filehash": "694a3ec64ef3056d5874ff03b889b868c294bccb16506468fdf1c289fe3aaadc2da25a5934de653af9633a5d993d2bb21491d84b3b2e2529e6b31d92c78a2228"
+    },
+    "libcom-err2": {
+      "version": "1.44.5-1+deb10u3",
+      "architecture": "amd64",
+      "filename": "libcom-err2_1.44.5-1+deb10u3_amd64.deb",
+      "filehash": "e88c2bc62979162faecd2b9a63acd483f18a9bc2456d4e605827a232275587e03a8ace299f94f5b2cdb33ef3ff292e8c3c3987eaa2c3a8d531b93a2f0ba17661"
+    },
+    "libdb5.3": {
+      "version": "5.3.28+dfsg1-0.5",
+      "architecture": "amd64",
+      "filename": "libdb5.3_5.3.28+dfsg1-0.5_amd64.deb",
+      "filehash": "ff5de5bba6c7366ed5817f368d1f0d018af21f33a59b3b76403602d64075a0f9747064d0496623f392c504ad3f299e79b41252a73c15e07ac207878df868a0ee"
+    },
+    "libdebconfclient0": {
+      "version": "0.249",
+      "architecture": "amd64",
+      "filename": "libdebconfclient0_0.249_amd64.deb",
+      "filehash": "46bee4bf7a6b8f55aa6f395ab9f9d10ebefd73a519b25d3b6e923ecd2cd615e66cbd9c374da4f8c2b83bbeb519ca3d31a8b3cbfd3eef09948a690871b86fac69"
+    },
+    "libext2fs2": {
+      "version": "1.44.5-1+deb10u3",
+      "architecture": "amd64",
+      "filename": "libext2fs2_1.44.5-1+deb10u3_amd64.deb",
+      "filehash": "dc53a881246edc46dd8ddfab35011f52990c506973b8a92a4963f67aa9ae2f5dbc6241af246aa79067700e917914c6ad939732d031c35f19b70ea14c22b97f62"
+    },
+    "libfdisk1": {
+      "version": "2.33.1-0.1",
+      "architecture": "amd64",
+      "filename": "libfdisk1_2.33.1-0.1_amd64.deb",
+      "filehash": "82e60589313f3c87902fd45a0da07e019247ddcb8bf9375f7948017f95ab17080f764a951f726b922a98085e5fda10ec2e49258d15968149211278ce7c40c223"
+    },
+    "libffi6": {
+      "version": "3.2.1-9",
+      "architecture": "amd64",
+      "filename": "libffi6_3.2.1-9_amd64.deb",
+      "filehash": "51c634d11c7e54edf7bec037e24c3a4666f97fc5659ae46f9381038e67cf3692b68beae8253117b4756f11face2e8410606128ce0078097c9a1523346763b390"
+    },
+    "libgcc1": {
+      "version": "1:8.3.0-6",
+      "architecture": "amd64",
+      "filename": "libgcc1_1%3a8.3.0-6_amd64.deb",
+      "filehash": "d794c87ae6f9bb1323a595e33c56cdab3ebd05d0b1c339990121428c1215adeefcf350e95236de70d81ccc76c7fdd79e3bee22c472cb540b40c7b438d2e6b396"
+    },
+    "libgcrypt20": {
+      "version": "1.8.4-5",
+      "architecture": "amd64",
+      "filename": "libgcrypt20_1.8.4-5_amd64.deb",
+      "filehash": "2cf809591777c6c91fe87989523aa22aa3d4705ef100ad93cd19dd6c5aa1bf5e9424dbf0c5a0dcd132d226ef881ed8d6dc5c8176ff16895ec7b076fd1f704cbb"
+    },
+    "libgmp10": {
+      "version": "2:6.1.2+dfsg-4",
+      "architecture": "amd64",
+      "filename": "libgmp10_2%3a6.1.2+dfsg-4_amd64.deb",
+      "filehash": "6956cc2aaad6af86fcbb38e183e9e3d4e3b3a35f5bae3c600146b877ed7caeab7468350bd5137872915e7032d750b6fa912617fc6a30be943a6c548fbd903f16"
+    },
+    "libgnutls30": {
+      "version": "3.6.7-4+deb10u3",
+      "architecture": "amd64",
+      "filename": "libgnutls30_3.6.7-4+deb10u3_amd64.deb",
+      "filehash": "9f263d6938b3f71ab126984396cdfeb9b7a4081e618086e59f43658afc553c6950b2703706a6a2ab87e51a50c78e06dd7c299ff1178c787f1e8b0a7b281be468"
+    },
+    "libgpg-error0": {
+      "version": "1.35-1",
+      "architecture": "amd64",
+      "filename": "libgpg-error0_1.35-1_amd64.deb",
+      "filehash": "736a962f3f456a57aa586f330fcb35eb94e3f916da94810b63f28b84b135418af2fdebd45eb07866f8ebb9777c8e57cb96213bf67766770f05ca6eb34d29871b"
+    },
+    "libhogweed4": {
+      "version": "3.4.1-1",
+      "architecture": "amd64",
+      "filename": "libhogweed4_3.4.1-1_amd64.deb",
+      "filehash": "5a11bbb92aad384b6fee72d14f12aa013fe083e023889ee491e6c207ad4ee55365a3ba4c4a8c0170549b85f33b7552c49b3db1fc333adde4122f7862c5c0cedd"
+    },
+    "libidn2-0": {
+      "version": "2.0.5-1+deb10u1",
+      "architecture": "amd64",
+      "filename": "libidn2-0_2.0.5-1+deb10u1_amd64.deb",
+      "filehash": "85dbf386dc8b4d9aaf3b9570cbc909dfafb17480dd7cf820eb12fe485ccf848d2571a166f4f266c06fe3f513f2d9f11ad9becaceedd1dc0b0262dd35493c2a31"
+    },
+    "liblz4-1": {
+      "version": "1.8.3-1",
+      "architecture": "amd64",
+      "filename": "liblz4-1_1.8.3-1_amd64.deb",
+      "filehash": "9af80ec951010179e22bcfc8109d81eabfa77f174b0d839f958f48a6c79d7734344f26326a72c85c571385e7a089b29a5270c86dfedbfbdb0c7d00f6d1537b6b"
+    },
+    "liblzma5": {
+      "version": "5.2.4-1",
+      "architecture": "amd64",
+      "filename": "liblzma5_5.2.4-1_amd64.deb",
+      "filehash": "d1cc42627464e5e44c419ce3b30e160281a021b3f57a1ecbb471e7babceb231a56f3632c3cb8d4db99e80a822dc5d63e1b42e7abd72bacaa1e5bb1e2d5eebbe1"
+    },
+    "libmount1": {
+      "version": "2.33.1-0.1",
+      "architecture": "amd64",
+      "filename": "libmount1_2.33.1-0.1_amd64.deb",
+      "filehash": "488070c25253f680a3f43e1841bcc568856b1adc5b61279f18b2eba1df91385e95a9a1f1be6a0fa796f27550fc083dec1f8662e7d00403fce114fe0ce1f7c065"
+    },
+    "libncursesw6": {
+      "version": "6.1+20181013-2+deb10u2",
+      "architecture": "amd64",
+      "filename": "libncursesw6_6.1+20181013-2+deb10u2_amd64.deb",
+      "filehash": "4818211d46442ea2eccd7a0f023ef9464d466e5e28556bf54ef49fffb92198509309a5bfcb3d0726f0c42b88adaf89b0475381d5f3c815d7b317ecf49753861a"
+    },
+    "libnettle6": {
+      "version": "3.4.1-1",
+      "architecture": "amd64",
+      "filename": "libnettle6_3.4.1-1_amd64.deb",
+      "filehash": "24542e10ad9fd00675e34bae6a045fa3fb864afa939ae3ca7f160045c41ef26a579fca3caef785ae44fbcbcd218493e8e6519ac1601a6310471741ab93dc0218"
+    },
+    "libp11-kit0": {
+      "version": "0.23.15-2",
+      "architecture": "amd64",
+      "filename": "libp11-kit0_0.23.15-2_amd64.deb",
+      "filehash": "7849b25a7e73d342b045011f26323be0e02d08bfbad16c1e4b19b8e030ab237688deaa289a72991fafeebbd75f845bb2af185df269464a460e49e68eae09a9d0"
+    },
+    "libpam-modules": {
+      "version": "1.3.1-5",
+      "architecture": "amd64",
+      "filename": "libpam-modules_1.3.1-5_amd64.deb",
+      "filehash": "b58de2f0c694afe2e41f969c6b0e756e805811f9c64645e204894ee8dda01d0a61a859a3b032e0b665d080c2699926bb544a4c5e92305fdb28bdcd2e7eb630cc"
+    },
+    "libpam-modules-bin": {
+      "version": "1.3.1-5",
+      "architecture": "amd64",
+      "filename": "libpam-modules-bin_1.3.1-5_amd64.deb",
+      "filehash": "4aba1c53bb77fef3890a26f1bbe61c291e1ee85e49949727bc1f514faedfcd056e712de59fd697c12774de8bfcd06709a6e7548f721609abe73936bcf3e7ff2d"
+    },
+    "libpam-runtime": {
+      "version": "1.3.1-5",
+      "architecture": "all",
+      "filename": "libpam-runtime_1.3.1-5_all.deb",
+      "filehash": "9b3a15e237e092930c0cf448ee3624b5e4f05c56d28f5b4cc9832ba32598461b89fcc3c651cc21afc816163e3259069dd220b9c50a2ce26635e018dc9ecdb09d"
+    },
+    "libpam0g": {
+      "version": "1.3.1-5",
+      "architecture": "amd64",
+      "filename": "libpam0g_1.3.1-5_amd64.deb",
+      "filehash": "24568c3f5be702417996994f758f69bc47322c5e719a2c00afd146e89f2b1aea000981ef2d32805018119f671f141adfd62b0c0dd6fc4c6bc7a0306f85d6a662"
+    },
+    "libpcre3": {
+      "version": "2:8.39-12",
+      "architecture": "amd64",
+      "filename": "libpcre3_2%3a8.39-12_amd64.deb",
+      "filehash": "3c7d71400a71fbbe776f2e53ed7927203df38f16754196d02ebb4736ff46b48fd3a42cb41f837c2e1cde85dea18b070cc9db670b68225a543ae5dcca45769ae5"
+    },
+    "libseccomp2": {
+      "version": "2.3.3-4",
+      "architecture": "amd64",
+      "filename": "libseccomp2_2.3.3-4_amd64.deb",
+      "filehash": "5a4eaa96e6e774948889909d618a8ed44a82f649cbba11622dc7b4478098bea006995d5a5a60ca026a57b76ad866d1e2c6caebd154a26eb6bd7e15291b558057"
+    },
+    "libselinux1": {
+      "version": "2.8-1+b1",
+      "architecture": "amd64",
+      "filename": "libselinux1_2.8-1+b1_amd64.deb",
+      "filehash": "b6412f664ecd11da97fe51af1b5bb28002d9e1dbe6e5de8fa8f76ff25ff21af3386f17fa647ba133d5f341d62ecceabd433b543845ed729a39c6353b40b459ab"
+    },
+    "libsemanage-common": {
+      "version": "2.8-2",
+      "architecture": "all",
+      "filename": "libsemanage-common_2.8-2_all.deb",
+      "filehash": "1d05091258738a861f2199ed29e9dff3dfcf59493ee8812d6de476d03b971efeeb1782ad424817afc6345ce68a81eb4769b3b53668756628b551d530bac0e20c"
+    },
+    "libsemanage1": {
+      "version": "2.8-2",
+      "architecture": "amd64",
+      "filename": "libsemanage1_2.8-2_amd64.deb",
+      "filehash": "06ca66506c153c6a7591e6ec4006df2fb7ca47ed94a874323a4e50ce2e6b79bd5fa0ff6babe41fd9b9a7292258e2f58ab7ae1e33d9c9e80750f08f21da080dca"
+    },
+    "libsepol1": {
+      "version": "2.8-1",
+      "architecture": "amd64",
+      "filename": "libsepol1_2.8-1_amd64.deb",
+      "filehash": "34edecde938bd1cef59d317e93aebf7c03ec326d06a415ed1d724004316c9211fdb17461aabfd9ed227a606e6cf33caa97290bd8c111ca5496d8b2d5d2f79b40"
+    },
+    "libsmartcols1": {
+      "version": "2.33.1-0.1",
+      "architecture": "amd64",
+      "filename": "libsmartcols1_2.33.1-0.1_amd64.deb",
+      "filehash": "c716f911222a1e9c43005d9923b8a32d842967f8ad9c0121f1d2e53ecbc0ddb86643bd55a869d70448500807caf4fcfe3a8e3dfa108f7615911853b1bffa9836"
+    },
+    "libss2": {
+      "version": "1.44.5-1+deb10u3",
+      "architecture": "amd64",
+      "filename": "libss2_1.44.5-1+deb10u3_amd64.deb",
+      "filehash": "73fb9459acb14b4b112d3809c8501f0365b63b97e06e1d9ef234bf1a8f71ce637b95fe5b63fc7fa22095dcde5f131deaa49ee88e99c8d416cf3cb0557cef2533"
+    },
+    "libstdc++6": {
+      "version": "8.3.0-6",
+      "architecture": "amd64",
+      "filename": "libstdc++6_8.3.0-6_amd64.deb",
+      "filehash": "5caa0b8190cd8078e756a49bb105f57ac811af75174d5cd025cd918ac1167e08238a12a023f0b70d5cd6740bd3bcd2e429991e48f258705104025882e57714f3"
+    },
+    "libsystemd0": {
+      "version": "241-7~deb10u4",
+      "architecture": "amd64",
+      "filename": "libsystemd0_241-7~deb10u4_amd64.deb",
+      "filehash": "d8468ce4c557a9458d92cd27ae5b2b2d44275a1cc83a8c89319fbb6fef5a5d18814f0f8d17973839cea7aedc3401aec0ffc0565dff97809a1bb9d5ade233d1ac"
+    },
+    "libtasn1-6": {
+      "version": "4.13-3",
+      "architecture": "amd64",
+      "filename": "libtasn1-6_4.13-3_amd64.deb",
+      "filehash": "254138e7e9cfdb49a197287ced1530c683b7a8ed004935adbd8aa0cc616bd46f568dc4c27e9cddb7c1b8f54c16eb6d6ddc4c9c7eda63351cc4ba4c89780ad8eb"
+    },
+    "libtinfo6": {
+      "version": "6.1+20181013-2+deb10u2",
+      "architecture": "amd64",
+      "filename": "libtinfo6_6.1+20181013-2+deb10u2_amd64.deb",
+      "filehash": "6546eef427c21268a03b33c6cd442e3f3fb32131189d9529f35db59ad2dd291e427393b705d7709e89129543c94d22c5db192f17c2ba015e6734f9a0e5c1fb29"
+    },
+    "libudev1": {
+      "version": "241-7~deb10u4",
+      "architecture": "amd64",
+      "filename": "libudev1_241-7~deb10u4_amd64.deb",
+      "filehash": "da7ad956b71a2e306310931a1800a552b8ac4da5ded31f4672516f752b42de54893a1064ecd33165f40a8b1efc9f29c69ae9927c060174bed378d8ca12d3a290"
+    },
+    "libunistring2": {
+      "version": "0.9.10-1",
+      "architecture": "amd64",
+      "filename": "libunistring2_0.9.10-1_amd64.deb",
+      "filehash": "1deb3993e975f7ed846551ce5d8966df21acded260d178b8cc200ab869a5384754e15357f2ab0e0905f4aa12b35e46b18038949a78e8e93ec5a2c4b2320d57f2"
+    },
+    "libuuid1": {
+      "version": "2.33.1-0.1",
+      "architecture": "amd64",
+      "filename": "libuuid1_2.33.1-0.1_amd64.deb",
+      "filehash": "efed76292f3b4301a7b12edeca9f1f3cb7797b1d1c4c1ce038cfb02cf28a76f425b821a351e0914091184eb025fbde7832a5e2c280bac2825a1bfa1dcd8668a0"
+    },
+    "libzstd1": {
+      "version": "1.3.8+dfsg-3",
+      "architecture": "amd64",
+      "filename": "libzstd1_1.3.8+dfsg-3_amd64.deb",
+      "filehash": "c62d215b8fbe2cf1ffa0094b308934f44863ab8e3414fb453802858e75e2d17596c1633ba9118f6e386421b1749d67fadf95c3e1d1db22052b82d2108d7935be"
+    },
+    "login": {
+      "version": "1:4.5-1.1",
+      "architecture": "amd64",
+      "filename": "login_1%3a4.5-1.1_amd64.deb",
+      "filehash": "0330ef1f353afd9558f7c1cf442144b5c1ec997025b062376df445b7f0be11acd3531899ebb483b8f89abf7213f22100a9b1937571717c3d61baef384893c453"
+    },
+    "mawk": {
+      "version": "1.3.3-17+b3",
+      "architecture": "amd64",
+      "filename": "mawk_1.3.3-17+b3_amd64.deb",
+      "filehash": "8c7af8e679dff413e0761089cff630bac8bbdf1ac41329be346d8ee5cdec2a8f2b1b61574b311fec445215ace5f010382ff39d0ac44c098a5e9112e17ade4939"
+    },
+    "mount": {
+      "version": "2.33.1-0.1",
+      "architecture": "amd64",
+      "filename": "mount_2.33.1-0.1_amd64.deb",
+      "filehash": "92d236faaf476df8d78eb47948b8156f4b3adb3e369c5b379d2e4db83afadbd7a18dfb5371c2cdd9bb751d22e13706fb9cf0c01e1129e83c63a28064a1a18727"
+    },
+    "ncurses-base": {
+      "version": "6.1+20181013-2+deb10u2",
+      "architecture": "all",
+      "filename": "ncurses-base_6.1+20181013-2+deb10u2_all.deb",
+      "filehash": "b1739e4c6d9e3c5293f173349db9a7e1f79071d2958783c7e6b402c57c2d42440a7543d0d3356e5e9cca04fe817ed4200c5ce3022a8d33dc52c8a30acf54799b"
+    },
+    "ncurses-bin": {
+      "version": "6.1+20181013-2+deb10u2",
+      "architecture": "amd64",
+      "filename": "ncurses-bin_6.1+20181013-2+deb10u2_amd64.deb",
+      "filehash": "f183976f85856a70dc7eb15d55331908c6508b81e7401d44fd46d44fa3fe07326cc6e9cbcde700bc652b998fd3661fe77884b74da49887646e4a2b0c6bc8d845"
+    },
+    "passwd": {
+      "version": "1:4.5-1.1",
+      "architecture": "amd64",
+      "filename": "passwd_1%3a4.5-1.1_amd64.deb",
+      "filehash": "56acb3418f1a3c261b4b0fca104df3e84b82bad90f428231d6f7ee2a9ada5168378405599eba0e76f185bad9a6c74ea1d40fdd14decb6ecb7e7917c2821e2f3c"
+    },
+    "perl-base": {
+      "version": "5.28.1-6",
+      "architecture": "amd64",
+      "filename": "perl-base_5.28.1-6_amd64.deb",
+      "filehash": "5182bbfe17347cbf5ddab9ee8ddabe8e868cc9265d5055e3da92c074c910cf2756dbe9c9d1b769b091d55a31d8e73c5ef3ecd0129cc2c01c967785f74b91674a"
+    },
+    "sed": {
+      "version": "4.7-1",
+      "architecture": "amd64",
+      "filename": "sed_4.7-1_amd64.deb",
+      "filehash": "3489d17ce41789f1989df26a3e02d280ad9c541c066cfa39567bfbacc194477b853e3adb48f3da0d7bf08d9b12f1d3dfa3bd5f8a11f9d10f9aa719aec551c4f2"
+    },
+    "sysvinit-utils": {
+      "version": "2.93-8",
+      "architecture": "amd64",
+      "filename": "sysvinit-utils_2.93-8_amd64.deb",
+      "filehash": "2cdfb3f31da53d15b493b82730dea3aff26baec2992ac4799773a999445673ba9ced356ded3cdc33c8be5e75c99e977dcb2304f13fcc8b636228e2d9e695ca71"
+    },
+    "tar": {
+      "version": "1.30+dfsg-6",
+      "architecture": "amd64",
+      "filename": "tar_1.30+dfsg-6_amd64.deb",
+      "filehash": "8349f58c56bcfe2d8116d2227e3c5df19ba3fb21fee28f47ef512386520f4abb2732a334b49b6c5e6da9463b8f58ac7b26929bda87791ada8a1179315b52bc16"
+    },
+    "tzdata": {
+      "version": "2020a-0+deb10u1",
+      "architecture": "all",
+      "filename": "tzdata_2020a-0+deb10u1_all.deb",
+      "filehash": "408a2625b6e80fc30e999936e644a51fa6e48e905a5544812d14196d472c1f879c390f2f4412d24c051661b5c5f22cb25e62bd952c85f3a62c27af94ae85682a"
+    },
+    "util-linux": {
+      "version": "2.33.1-0.1",
+      "architecture": "amd64",
+      "filename": "util-linux_2.33.1-0.1_amd64.deb",
+      "filehash": "b7f37c241445a49ccd5d3029213d5d4f6ec42840ff4bb08ac50705f042655a16fb9eca64ba8a298a2013ed309f37252125e7e25e6639bbe0538a90e8874fd174"
+    },
+    "zlib1g": {
+      "version": "1:1.2.11.dfsg-1",
+      "architecture": "amd64",
+      "filename": "zlib1g_1%3a1.2.11.dfsg-1_amd64.deb",
+      "filehash": "9eda86902577c1a9771c09c04b11634a4beea65fe09886838331b0c227e28666b5134deee978b3152eab0ef4748f7ad4e344a1cce8e67bb4e7f21bd37358129f"
+    },
+    "zsh": {
+      "version": "5.7.1-1",
+      "architecture": "amd64",
+      "filename": "zsh_5.7.1-1_amd64.deb",
+      "filehash": "75d38a1ea82e73842c115cdfc779b6b8c94c329382607bf48610f5ac88262c6ef2ad8eb38b7d68d7cdade9a045344251c9c1c03bfc0f3197c992d16eab99c78d"
+    },
+    "zsh-common": {
+      "version": "5.7.1-1",
+      "architecture": "all",
+      "filename": "zsh-common_5.7.1-1_all.deb",
+      "filehash": "d5fbd1b3e7d4c49b4a4c25f79e7855a888aa88bc421cc6a89ce0183cf89a2e766d96c6c54cbd952d8581423ef0e41da5591d51d69109702eaab37bec04a4c632"
+    }
+  }
+}
