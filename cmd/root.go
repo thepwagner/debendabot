@@ -8,11 +8,17 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"github.com/thepwagner/debendabot/manifest"
 )
 
 var cfgFile string
 
-const flagLogLevel = "loglevel"
+const (
+	flagDir          = "dir"
+	flagManifestPath = "manifest"
+	flagLockfilePath = "lockfile"
+	flagLogLevel     = "loglevel"
+)
 
 var rootCmd = &cobra.Command{
 	Use:   "debendabot",
@@ -32,7 +38,6 @@ var rootCmd = &cobra.Command{
 		logrus.SetFormatter(&logrus.TextFormatter{
 			TimestampFormat: "15:04:05.000",
 			FullTimestamp:   true,
-
 		})
 		return nil
 	},
@@ -45,10 +50,25 @@ func Execute() {
 	}
 }
 
-func init() {
-	cobra.OnInitialize(initConfig)
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.debendabot.yaml)")
-	rootCmd.PersistentFlags().String(flagLogLevel, "info", "Log level")
+func parseManifest(cmd *cobra.Command) (*manifest.Manifest, error) {
+	dir, err := cmd.Flags().GetString(flagDir)
+	if err != nil {
+		return nil, err
+	}
+	mfp, err := cmd.Flags().GetString(flagManifestPath)
+	if err != nil {
+		return nil, err
+	}
+	lfp, err := cmd.Flags().GetString(flagLockfilePath)
+	if err != nil {
+		return nil, err
+	}
+	logrus.WithFields(logrus.Fields{
+		"dir":      dir,
+		"manifest": mfp,
+		"lockfile": lfp,
+	}).Info("parsing manifests...")
+	return manifest.ParseManifest(dir, mfp, lfp)
 }
 
 // initConfig reads in config file and ENV variables if set.
@@ -75,4 +95,13 @@ func initConfig() {
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Println("Using config file:", viper.ConfigFileUsed())
 	}
+}
+
+func init() {
+	cobra.OnInitialize(initConfig)
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.debendabot.yaml)")
+	rootCmd.PersistentFlags().String(flagLogLevel, "info", "Log level")
+	rootCmd.PersistentFlags().StringP(flagDir, "d", ".", "Directory of manifest")
+	rootCmd.PersistentFlags().StringP(flagManifestPath, "m", manifest.Filename, "Manifest filename")
+	rootCmd.PersistentFlags().StringP(flagLockfilePath, "l", manifest.LockFilename, "Lockfile filename")
 }
