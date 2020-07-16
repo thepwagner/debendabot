@@ -1,0 +1,7 @@
+{
+  "image": "thepwagner/gnupg",
+  "distro": "buster",
+  "packages": {
+    "gnupg2": "stable"
+  }
+}
