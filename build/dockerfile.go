@@ -76,7 +76,7 @@ RUN cd $ROOTFS_PATH/var/cache/apt/archives && sha512sum *.deb | tee /deb-hashes.
 FROM build
 RUN rm -Rf $ROOTFS_PATH/var/cache/apt/* $ROOTFS_PATH/var/lib/apt/lists/*
 RUN rm -Rf $ROOTFS_PATH/usr/share/man/*
-RUN find $ROOTFS_PATH/var/log -exec truncate -s0 {} \;
+RUN find $ROOTFS_PATH/var/log -type f -exec truncate -s0 {} \;
 CMD ["/usr/bin/bash"]
 {{if .Proxy}}
 ENV http_proxy=
