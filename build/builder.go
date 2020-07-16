@@ -91,13 +91,12 @@ func (b *Builder) Lock(ctx context.Context, mf manifest.Manifest) (*manifest.Dpk
 	}
 
 	// Pin the docker parent to a SHA:
-	image, _, err := b.docker.ImageInspectWithRaw(ctx, manifestImage)
+	image, _, err := b.docker.ImageInspectWithRaw(ctx, baseImage(mf))
 	if err != nil {
 		return nil, fmt.Errorf("querying manifest image: %w", err)
 	}
-	pinnedImage := fmt.Sprintf("debian@%s", image.Parent)
 	dpkgLock := &manifest.DpkgLockJSON{
-		Image: pinnedImage,
+		Image: image.RepoDigests[0],
 	}
 
 	// Extract manifest file:

@@ -9,7 +9,12 @@ import (
 )
 
 var dockerfileTemplate = template.Must(template.New("dockerfile").Parse(`
-FROM debian:{{.Distro}}-slim AS base
+FROM {{.BaseImage}} AS base
+
+{{/* 
+	TODO: maybe debootstrap?
+	Expensive, but lets us provide as hash of all the .debs. that would be cool.
+*/}}
 
 FROM base AS sources
 {{if .Proxy}}
@@ -38,6 +43,7 @@ ENV http_proxy=
 
 type dockerfileTemplateParams struct {
 	manifest.DpkgJSON
+	BaseImage    string
 	PackageSpecs []string
 	Proxy        string
 }
@@ -50,6 +56,8 @@ func genDockerfile(mf manifest.Manifest) (string, error) {
 		// FIXME: don't hardcode my apt-cacher
 		Proxy: "http://172.17.0.1:3142",
 	}
+	p.BaseImage = baseImage(mf)
+
 	for name, version := range p.Packages {
 		switch version {
 		case "stable", "unstable", "testing":
@@ -75,4 +83,11 @@ func genDockerfile(mf manifest.Manifest) (string, error) {
 		}
 	}
 	return ret.String(), nil
+}
+
+func baseImage(mf manifest.Manifest) string {
+	if mf.DpkgLockJSON != nil {
+		return mf.DpkgLockJSON.Image
+	}
+	return fmt.Sprintf("debian:%s-slim", mf.DpkgJSON.Distro)
 }

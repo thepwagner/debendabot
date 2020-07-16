@@ -1,5 +1,5 @@
 {
-  "image": "debian@sha256:910bc957818f22062aa658be9d00dd4aff7a4bbec4b244b4ccc6963698020992",
+  "image": "debian@sha256:d67632d49fcae559f86bd2b685c9159d0b1e799fd1d109dfbfccfab4ea773ba5",
   "packages": {
     "adduser": {
       "version": "3.118",

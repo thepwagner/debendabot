@@ -77,7 +77,6 @@ func BuildCommand(ctx context.Context, dir, manifestPath, lockfilePath string) e
 	if err := writeLockfile(lock, filepath.Join(dir, lockfilePath)); err != nil {
 		return err
 	}
-
 	return nil
 }
 
