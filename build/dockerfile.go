@@ -31,7 +31,7 @@ FROM sources AS build
 ARG DEBIAN_FRONTEND=noninteractive
 
 {{ if .LockedPackages }}
-RUN apt-get install -y \
+RUN apt-get install -y --no-install-recommends \
 {{ range $packageSpec := .LockedPackageSpecs }}
 	{{$packageSpec}} \
 {{ end }}
@@ -46,6 +46,10 @@ RUN apt-get install -y --no-install-recommends \
 	{{$packageSpec}} \
 {{ end }}
   && true
+
+{{ if .LockedPackages }}
+RUN apt-get --purge -y autoremove
+{{ end }}
 
 FROM build AS manifest
 RUN apt list --installed -qq | tee /apt-installed.txt

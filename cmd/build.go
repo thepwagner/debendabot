@@ -87,6 +87,9 @@ func writeLockfile(lock *manifest.DpkgLockJSON, lockfilePath string) error {
 	}
 	defer lf.Close()
 
+	if err := lf.Truncate(0); err != nil {
+		return fmt.Errorf("truncating lockfile: %w", err)
+	}
 	encoder := json.NewEncoder(lf)
 	encoder.SetIndent("", "  ")
 	if err := encoder.Encode(lock); err != nil {
