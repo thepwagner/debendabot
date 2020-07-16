@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/docker/docker/client"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/thepwagner/debendabot/build"
 	"github.com/thepwagner/debendabot/manifest"
@@ -31,11 +32,16 @@ var buildCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
+		logrus.WithFields(logrus.Fields{
+			"dir":      dir,
+			"manifest": mfp,
+			"lockfile": lfp,
+		}).Info("starting build command")
 
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
 		defer cancel()
 
-		return BuildCommand(ctx, dir, mfp,lfp)
+		return BuildCommand(ctx, dir, mfp, lfp)
 	},
 }
 
@@ -45,12 +51,20 @@ const (
 	flagLockfilePath = "lockfile"
 )
 
-func BuildCommand(ctx context.Context, dir , manifestPath, lockfilePath string) error {
-	mf, err := parseDpkgJSON(filepath.Join(dir, manifestPath))
+func BuildCommand(ctx context.Context, dir, manifestPath, lockfilePath string) error {
+	mf, lf, err := manifest.ParseManifests(dir, manifestPath, lockfilePath)
 	if err != nil {
 		return err
 	}
-	// TODO: load lockfile
+	var lockedPackages int
+	if lf != nil {
+		lockedPackages = len(lf.Packages)
+	}
+	logrus.WithFields(logrus.Fields{
+		"image":           mf.Image,
+		"packages":        len(mf.Packages),
+		"locked_packages": lockedPackages,
+	}).Info("loaded manifest and lockfile")
 
 	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
@@ -71,20 +85,13 @@ func BuildCommand(ctx context.Context, dir , manifestPath, lockfilePath string) 
 	return nil
 }
 
-func parseDpkgJSON(path string) (*manifest.DpkgJSON, error) {
-	mf, err := os.Open(path)
-	if err != nil {
-		return nil, fmt.Errorf("opening %q: %w", path, err)
-	}
-	defer mf.Close()
-	return manifest.ParseDpkgJSON(mf)
-}
-
 func writeLockfile(lock *manifest.DpkgLockJSON, lockfilePath string) error {
-	lf, err := os.OpenFile(lockfilePath, os.O_CREATE, 0600)
+	lf, err := os.OpenFile(lockfilePath, os.O_WRONLY|os.O_CREATE, 0600)
 	if err != nil {
 		return fmt.Errorf("opening lockfile: %w", err)
 	}
+	defer lf.Close()
+
 	encoder := json.NewEncoder(lf)
 	encoder.SetIndent("", "  ")
 	if err := encoder.Encode(lock); err != nil {

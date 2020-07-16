@@ -12,12 +12,28 @@ import (
 
 var cfgFile string
 
+const flagLogLevel = "loglevel"
+
 var rootCmd = &cobra.Command{
 	Use:   "debendabot",
 	Short: "Dependabot for Debian",
 	Long:  `debendabot - what if debian image updates could be locked and managed by Dependabot`,
-	PersistentPreRun: func(_ *cobra.Command, _ []string) {
-		logrus.SetLevel(logrus.DebugLevel)
+	PersistentPreRunE: func(cmd *cobra.Command, _ []string) error {
+		lvl, err := cmd.Flags().GetString(flagLogLevel)
+		if err != nil {
+			return err
+		}
+		parsed, err := logrus.ParseLevel(lvl)
+		if err != nil {
+			return err
+		}
+		logrus.SetLevel(parsed)
+
+		logrus.SetFormatter(&logrus.TextFormatter{
+			TimestampFormat: "15:04:05.000",
+			FullTimestamp:   true,
+		})
+		return nil
 	},
 }
 
@@ -31,6 +47,7 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(initConfig)
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.debendabot.yaml)")
+	rootCmd.PersistentFlags().String(flagLogLevel, "info", "Log level")
 }
 
 // initConfig reads in config file and ENV variables if set.
