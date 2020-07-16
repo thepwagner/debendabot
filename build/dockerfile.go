@@ -57,6 +57,18 @@ RUN chroot $ROOTFS_PATH sh -c "apt-get install -y --no-install-recommends \
 {{ if .LockedPackages }}
 RUN chroot $ROOTFS_PATH apt-get --purge -y autoremove
 {{ end }}
+
+
+{{ if .DebHashes }}
+RUN cd $ROOTFS_PATH/var/cache/apt/archives && \
+  rm -f SHASUMS \
+{{ range $debHash := .DebHashes }}
+  && echo "{{$debHash}}" >> SHASUMS \
+{{ end }}
+  && sha512sum -c SHASUMS \
+  && rm -f SHASUMS
+{{ end }}
+
 RUN chroot $ROOTFS_PATH apt-get autoclean
 
 FROM build AS manifest
@@ -76,6 +88,7 @@ type dockerfileTemplateParams struct {
 	LockedPackages     []string
 	PackageSpecs       []string
 	Proxy              string
+	DebHashes          []string
 }
 
 func genDockerfile(mf manifest.Manifest) (string, error) {
@@ -105,10 +118,12 @@ func genDockerfile(mf manifest.Manifest) (string, error) {
 		for name, lock := range mf.DpkgLockJSON.Packages {
 			p.LockedPackageSpecs = append(p.LockedPackageSpecs, fmt.Sprintf("%s=%s", name, lock.Version))
 			p.LockedPackages = append(p.LockedPackages, string(name))
+			p.DebHashes = append(p.DebHashes, fmt.Sprintf("%s\t%s", lock.DebHash, lock.DebFilename))
 		}
 	}
 	sort.Strings(p.LockedPackageSpecs)
 	sort.Strings(p.LockedPackages)
+	sort.Strings(p.DebHashes)
 
 	if err := dockerfileTemplate.Execute(&buf, p); err != nil {
 		return "", fmt.Errorf("rendering dockerfile template: %w", err)

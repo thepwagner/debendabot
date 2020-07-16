@@ -134,7 +134,7 @@ func (b *Builder) Lock(ctx context.Context, mf manifest.Manifest) (*manifest.Dpk
 		if packageHashLine == "" {
 			continue
 		}
-		lineParts := strings.Split(packageHashLine, "  ") //intentional 2 spaces
+		lineParts := strings.Split(packageHashLine, "  ")
 		packageName := manifest.PackageName(strings.Split(lineParts[1], "_")[0])
 		packageHashes[packageName] = hashedPackage{
 			filename: lineParts[1],
