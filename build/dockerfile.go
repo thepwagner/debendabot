@@ -2,6 +2,7 @@ package build
 
 import (
 	"fmt"
+	"sort"
 	"strings"
 	"text/template"
 
@@ -13,7 +14,7 @@ FROM {{.BaseImage}} AS base
 
 {{/* 
 	TODO: maybe debootstrap?
-	Expensive, but lets us provide as hash of all the .debs. that would be cool.
+	expensive, but lets us provide as hash of all the .debs. that would be cool.
 */}}
 
 FROM base AS sources
@@ -42,7 +43,6 @@ ENV http_proxy=
 `))
 
 type dockerfileTemplateParams struct {
-	manifest.DpkgJSON
 	BaseImage    string
 	PackageSpecs []string
 	Proxy        string
@@ -52,22 +52,29 @@ func genDockerfile(mf manifest.Manifest) (string, error) {
 	var buf strings.Builder
 
 	p := dockerfileTemplateParams{
-		DpkgJSON: mf.DpkgJSON,
 		// FIXME: don't hardcode my apt-cacher
 		Proxy: "http://172.17.0.1:3142",
 	}
 	p.BaseImage = baseImage(mf)
 
-	for name, version := range p.Packages {
-		switch version {
-		case "stable", "unstable", "testing":
-			p.PackageSpecs = append(p.PackageSpecs, fmt.Sprintf("%s/%s", name, version))
-		default:
-			// XXX: this requires an exact match - could we filter candidates against semver?
-			// not all packages _are_ semver; some library can handle that? :crossed_fingers:
-			p.PackageSpecs = append(p.PackageSpecs, fmt.Sprintf("%s=%s", name, version))
+	if mf.DpkgLockJSON == nil {
+		// Build package specs from dpkg.json:
+		for name, version := range mf.DpkgJSON.Packages {
+			switch version {
+			case "stable", "unstable", "testing":
+				p.PackageSpecs = append(p.PackageSpecs, fmt.Sprintf("%s/%s", name, version))
+			default:
+				// XXX: this requires an exact match - could we filter candidates against semver?
+				// not all packages _are_ semver; some library can handle that? :crossed_fingers:
+				p.PackageSpecs = append(p.PackageSpecs, fmt.Sprintf("%s=%s", name, version))
+			}
+		}
+	} else {
+		for name, lock := range mf.DpkgLockJSON.Packages {
+			p.PackageSpecs = append(p.PackageSpecs, fmt.Sprintf("%s=%s", name, lock.Version))
 		}
 	}
+	sort.Strings(p.PackageSpecs)
 
 	if err := dockerfileTemplate.Execute(&buf, p); err != nil {
 		return "", fmt.Errorf("rendering dockerfile template: %w", err)
