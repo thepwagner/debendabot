@@ -63,12 +63,20 @@ func parseManifest(cmd *cobra.Command) (*manifest.Manifest, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	m, err := manifest.ParseManifest(dir, mfp, lfp)
+	if err != nil {
+		return nil, err
+	}
+
 	logrus.WithFields(logrus.Fields{
-		"dir":      dir,
-		"manifest": mfp,
-		"lockfile": lfp,
-	}).Info("parsing manifests...")
-	return manifest.ParseManifest(dir, mfp, lfp)
+		"dir":            dir,
+		"manifest":       mfp,
+		"lockfile":       lfp,
+		"packages":       m.PackageCount(),
+		"locked_packages": m.LockedPackageCount(),
+	}).Info("parsed manifests")
+	return m, err
 }
 
 // initConfig reads in config file and ENV variables if set.
