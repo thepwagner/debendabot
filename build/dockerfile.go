@@ -69,13 +69,15 @@ RUN cd $ROOTFS_PATH/var/cache/apt/archives && \
   && rm -f SHASUMS
 {{ end }}
 
-RUN chroot $ROOTFS_PATH apt-get autoclean
-
 FROM build AS manifest
 RUN chroot $ROOTFS_PATH apt list --installed -qq | tee /apt-installed.txt
 RUN cd $ROOTFS_PATH/var/cache/apt/archives && sha512sum *.deb | tee /deb-hashes.txt
 
 FROM build
+RUN rm -Rf $ROOTFS_PATH/var/cache/apt/* $ROOTFS_PATH/var/lib/apt/lists/*
+RUN rm -Rf $ROOTFS_PATH/usr/share/man/*
+RUN find $ROOTFS_PATH/var/log -exec truncate -s0 {} \;
+CMD ["/usr/bin/bash"]
 {{if .Proxy}}
 ENV http_proxy=
 {{end}}
