@@ -6,7 +6,7 @@
       "architecture": "all"
     },
     "apt": {
-      "version": "1.8.2.1",
+      "version": "1.8.2",
       "architecture": "amd64"
     },
     "base-files": {
@@ -138,7 +138,7 @@
       "architecture": "amd64"
     },
     "libapt-pkg5.0": {
-      "version": "1.8.2.1",
+      "version": "1.8.2",
       "architecture": "amd64"
     },
     "libassuan0": {
@@ -214,7 +214,7 @@
       "architecture": "amd64"
     },
     "libgnutls30": {
-      "version": "3.6.7-4+deb10u4",
+      "version": "3.6.7-4+deb10u3",
       "architecture": "amd64"
     },
     "libgpg-error0": {

@@ -27,7 +27,8 @@ func NewBuilder(docker *client.Client) *Builder {
 }
 
 func (b *Builder) Build(ctx context.Context, mf manifest.Manifest) error {
-	return b.build(ctx, mf, "", mf.DpkgJSON.Image)
+	buildImage := fmt.Sprintf("debendabot-build/%s", mf.DpkgJSON.Image)
+	return b.build(ctx, mf, "", buildImage)
 }
 
 func (b *Builder) build(ctx context.Context, mf manifest.Manifest, target string, tag string) error {

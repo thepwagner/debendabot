@@ -12,11 +12,6 @@ import (
 var dockerfileTemplate = template.Must(template.New("dockerfile").Parse(`
 FROM {{.BaseImage}} AS base
 
-{{/* 
-	TODO: maybe debootstrap?
-	expensive, but lets us provide as hash of all the .debs. that would be cool.
-*/}}
-
 FROM base AS sources
 {{if .Proxy}}
 ENV http_proxy={{.Proxy}}
@@ -30,8 +25,20 @@ RUN apt-get update
 FROM sources AS build
 ARG DEBIAN_FRONTEND=noninteractive
 
+RUN apt-get update && \
+  apt-get install -y \
+   --no-install-recommends \
+   debootstrap
+
+ENV ROOTFS_PATH=/rootfs
+RUN debootstrap \
+  --arch amd64 \
+  --variant=minbase \
+  {{.Distro}} \
+  ${ROOTFS_PATH} http://cdn-fastly.deb.debian.org/debian 
+
 {{ if .LockedPackages }}
-RUN apt-get install -y --no-install-recommends \
+RUN chroot $ROOTFS_PATH sh -c "apt-get install -y --no-install-recommends \
 {{ range $packageSpec := .LockedPackageSpecs }}
 	{{$packageSpec}} \
 {{ end }}
@@ -39,20 +46,22 @@ RUN apt-get install -y --no-install-recommends \
 {{ range $packageSpec := .LockedPackages }}
 	{{$packageSpec}} \
 {{ end }}
-  && true
+  && true"
 {{ end }}
-RUN apt-get install -y --no-install-recommends \
+RUN chroot $ROOTFS_PATH sh -c "apt-get install -y --no-install-recommends \
 {{ range $packageSpec := .PackageSpecs }}
 	{{$packageSpec}} \
 {{ end }}
-  && true
+  && true"
 
 {{ if .LockedPackages }}
-RUN apt-get --purge -y autoremove
+RUN chroot $ROOTFS_PATH apt-get --purge -y autoremove
 {{ end }}
+RUN chroot $ROOTFS_PATH apt-get autoclean
 
 FROM build AS manifest
-RUN apt list --installed -qq | tee /apt-installed.txt
+RUN chroot $ROOTFS_PATH apt list --installed -qq | tee /apt-installed.txt
+RUN cd $ROOTFS_PATH/var/cache/apt/archives && sha512sum *.deb | tee /deb-hashes.txt
 
 FROM build
 {{if .Proxy}}
@@ -61,6 +70,7 @@ ENV http_proxy=
 `))
 
 type dockerfileTemplateParams struct {
+	Distro             string
 	BaseImage          string
 	LockedPackageSpecs []string
 	LockedPackages     []string
@@ -72,10 +82,11 @@ func genDockerfile(mf manifest.Manifest) (string, error) {
 	var buf strings.Builder
 
 	p := dockerfileTemplateParams{
+		Distro:    mf.DpkgJSON.Distro,
+		BaseImage: baseImage(mf),
 		// FIXME: don't hardcode my apt-cacher
 		Proxy: "http://172.17.0.1:3142",
 	}
-	p.BaseImage = baseImage(mf)
 
 	// Build package specs from dpkg.json:
 	for name, version := range mf.DpkgJSON.Packages {
